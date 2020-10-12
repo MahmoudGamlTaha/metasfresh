@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
 
@@ -126,7 +126,7 @@ public final class ProductQtyReportContainer extends BeanItemContainer<ProductQt
 		return super.addBean(bean);
 	}
 
-	public final boolean addBeanItem(final BeanItem<ProductQtyReport> item)
+	public boolean addBeanItem(final BeanItem<ProductQtyReport> item)
 	{
 		final ProductQtyReport newItemId = item.getBean();
 		final boolean filter = true;
@@ -139,7 +139,7 @@ public final class ProductQtyReportContainer extends BeanItemContainer<ProductQt
 		this.sort(new Object[] { autoSortPropertyId }, new boolean[] { true });
 	}
 
-	public final BeanItem<ProductQtyReport> removeProductIfZeroQty(final Product product)
+	public BeanItem<ProductQtyReport> removeProductIfZeroQty(final Product product)
 	{
 		final ProductQtyReport bean = getByProduct(product);
 		if (bean == null)

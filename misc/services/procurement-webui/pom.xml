@@ -20,7 +20,7 @@
 	<properties>
 		<start-class>de.metas.procurement.webui.Application</start-class>
 
-		<version.vaadin>7.6.1</version.vaadin>
+		<version.vaadin>7.7.8</version.vaadin>
 		<vaadin.plugin.version>${version.vaadin}</vaadin.plugin.version>
 
 		<touchkit.version>4.1.0.rc1</touchkit.version>
@@ -301,6 +301,11 @@
 					<artifactId>jackson-databind</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 
 	</dependencies>

@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Locale;
+import java.util.function.Supplier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.base.Strings;
-import com.google.gwt.thirdparty.guava.common.base.Supplier;
-import com.google.gwt.thirdparty.guava.common.eventbus.Subscribe;
+import com.google.common.base.Strings;
+import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
@@ -26,7 +26,6 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
@@ -35,8 +34,6 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.Window.CloseEvent;
-import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.metas.procurement.webui.event.MFEventBus;
@@ -145,14 +142,7 @@ public class MFProcurementUI extends UI
 		//
 		// Setup navigator
 		MFNavigator.createAndBind(this)
-				.setLoginView(LoginView.class, new Supplier<Boolean>()
-				{
-					@Override
-					public Boolean get()
-					{
-						return isLoggedIn();
-					}
-				})
+				.setLoginView(LoginView.class, (Supplier<Boolean>) () -> isLoggedIn())
 				.setDefaultView(MainView.class)
 				.setViewNoLoginRequired(PasswordResetView.NAME, PasswordResetView.class);
 	}
@@ -356,15 +346,7 @@ public class MFProcurementUI extends UI
 			window.setModal(true);
 			window.setResizable(false);
 			window.setDraggable(false);
-			window.addCloseListener(new CloseListener()
-			{
-
-				@Override
-				public void windowClose(final CloseEvent e)
-				{
-					setIsMobile();
-				}
-			});
+			window.addCloseListener(e -> setIsMobile());
 
 			UI.getCurrent().addWindow(window);
 			window.center();
@@ -407,26 +389,16 @@ public class MFProcurementUI extends UI
 
 		root.addComponents(message, footer);
 
-		final Button buttonSend = new Button(i18n.get("Logout.sendWarning.sendAndLogoutButton"), new ClickListener()
-		{
-			@Override
-			public void buttonClick(final ClickEvent event)
-			{
-				sendService.sendAll();
-				confirmDialog.close();
-				doLogout();
-			}
+		final Button buttonSend = new Button(i18n.get("Logout.sendWarning.sendAndLogoutButton"), (ClickListener) event -> {
+			sendService.sendAll();
+			confirmDialog.close();
+			doLogout();
 		});
 		buttonSend.addStyleName(ValoTheme.BUTTON_PRIMARY);
 
-		final Button buttonLogout = new Button(i18n.get("Logout.caption"), new ClickListener()
-		{
-			@Override
-			public void buttonClick(final ClickEvent event)
-			{
-				confirmDialog.close();
-				doLogout();
-			}
+		final Button buttonLogout = new Button(i18n.get("Logout.caption"), (ClickListener) event -> {
+			confirmDialog.close();
+			doLogout();
 		});
 		buttonLogout.addStyleName(ValoTheme.BUTTON_DANGER);
 

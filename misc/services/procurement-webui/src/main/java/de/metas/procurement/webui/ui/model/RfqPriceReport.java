@@ -2,7 +2,7 @@ package de.metas.procurement.webui.ui.model;
 
 import java.math.BigDecimal;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /*
  * #%L
@@ -50,7 +50,7 @@ public class RfqPriceReport
 	@Override
 	public String toString()
 	{
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("price", price)
 				.add("rfq_id", rfq_id)
 				.add("id", id)

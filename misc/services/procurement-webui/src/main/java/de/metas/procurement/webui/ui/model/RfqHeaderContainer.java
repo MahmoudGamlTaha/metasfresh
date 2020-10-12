@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.Objects;
 import com.vaadin.data.util.BeanItemContainer;
 
 import de.metas.procurement.webui.Application;

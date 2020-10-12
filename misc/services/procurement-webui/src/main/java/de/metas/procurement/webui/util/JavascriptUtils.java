@@ -1,6 +1,6 @@
 package de.metas.procurement.webui.util;
 
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.Preconditions;
 import com.vaadin.server.Page;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.JavaScript;

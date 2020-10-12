@@ -3,7 +3,7 @@ package de.metas.procurement.webui.ui.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.Preconditions;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;

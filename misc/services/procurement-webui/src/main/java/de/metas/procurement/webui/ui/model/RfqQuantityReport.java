@@ -3,7 +3,7 @@ package de.metas.procurement.webui.ui.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 import de.metas.procurement.webui.model.Rfq;
 import de.metas.procurement.webui.util.DateUtils;
@@ -32,12 +32,12 @@ import de.metas.procurement.webui.util.DateUtils;
 
 public final class RfqQuantityReport
 {
-	public static final RfqQuantityReport of(final Rfq rfqRecord, final Date day, final BigDecimal qty, final String qtyCUInfo)
+	public static RfqQuantityReport of(final Rfq rfqRecord, final Date day, final BigDecimal qty, final String qtyCUInfo)
 	{
 		return new RfqQuantityReport(rfqRecord, day, qty, qtyCUInfo);
 	}
 
-	public static final RfqQuantityReport of(final Rfq rfqRecord, final Date day, final String qtyCUInfo)
+	public static RfqQuantityReport of(final Rfq rfqRecord, final Date day, final String qtyCUInfo)
 	{
 		final BigDecimal qty = BigDecimal.ZERO;
 		return new RfqQuantityReport(rfqRecord, day, qty, qtyCUInfo);
@@ -71,7 +71,7 @@ public final class RfqQuantityReport
 	@Override
 	public String toString()
 	{
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("product", product_uuid)
 				.add("qty", qty)
 				.add("qtySent", qtySent)

@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Locale;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 
 import de.metas.procurement.webui.model.Product;
 import de.metas.procurement.webui.model.ProductSupply;
@@ -40,13 +40,13 @@ public final class ProductQtyReport implements ISendService.ISendAwareBean
 	public static final String PROPERY_ProductName = "productName";
 	public static final String PROPERTY_Qty = "qty";
 
-	public static final ProductQtyReport of(final Product product, final Date day)
+	public static ProductQtyReport of(final Product product, final Date day)
 	{
 		final boolean sent = true; // important: we consider a zero qty as "sent" because we don't want to count it when we count the items which are not sent 
 		return new ProductQtyReport(product, day, BigDecimal.ZERO, sent);
 	}
 
-	public static final ProductQtyReport of(final ProductSupply productSupply)
+	public static ProductQtyReport of(final ProductSupply productSupply)
 	{
 		final boolean sent = true;
 		return new ProductQtyReport(productSupply.getProduct(), productSupply.getDay(), productSupply.getQty(), sent);
@@ -74,7 +74,7 @@ public final class ProductQtyReport implements ISendService.ISendAwareBean
 	@Override
 	public String toString()
 	{
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("product", product)
 				.add("qty", qty)
 				.add("qtySent", qtySent)

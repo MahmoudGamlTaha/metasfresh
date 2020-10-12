@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Throwables;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Throwables;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
@@ -235,7 +235,7 @@ public class LoginRememberMeService
 		@Override
 		public String toString()
 		{
-			return Objects.toStringHelper(this)
+			return MoreObjects.toStringHelper(this)
 					.add("user", user)
 					.add("token", token)
 					.toString();

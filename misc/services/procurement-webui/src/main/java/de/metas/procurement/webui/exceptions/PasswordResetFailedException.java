@@ -1,6 +1,6 @@
 package de.metas.procurement.webui.exceptions;
 
-import com.google.gwt.thirdparty.guava.common.html.HtmlEscapers;
+import com.google.common.html.HtmlEscapers;
 import com.vaadin.server.ErrorMessage;
 
 /*

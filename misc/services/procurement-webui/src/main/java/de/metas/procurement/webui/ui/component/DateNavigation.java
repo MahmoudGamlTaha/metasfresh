@@ -9,19 +9,16 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 
 import de.metas.procurement.webui.Application;
 import de.metas.procurement.webui.util.DateRange;
 import de.metas.procurement.webui.util.DateUtils;
-
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 
 /*
  * #%L
@@ -80,26 +77,12 @@ public class DateNavigation extends HorizontalLayout
 		prevDateButton = new Button();
 		prevDateButton.setEnabled(false);
 		prevDateButton.setIcon(FontAwesome.ARROW_LEFT);
-		prevDateButton.addClickListener(new ClickListener()
-		{
-			@Override
-			public void buttonClick(final ClickEvent event)
-			{
-				onPrevDate();
-			}
-		});
+		prevDateButton.addClickListener(event -> onPrevDate());
 
 		nextDateButton = new Button();
 		nextDateButton.setEnabled(false);
 		nextDateButton.setIcon(FontAwesome.ARROW_RIGHT);
-		nextDateButton.addClickListener(new ClickListener()
-		{
-			@Override
-			public void buttonClick(final ClickEvent event)
-			{
-				onNextDate();
-			}
-		});
+		nextDateButton.addClickListener(event -> onNextDate());
 
 		dateLabel = new Label();
 		dateLabel.setSizeFull();
@@ -214,7 +197,7 @@ public class DateNavigation extends HorizontalLayout
 		setDate(nextDate);
 	}
 
-	public static interface DateNavigationHandler
+	public interface DateNavigationHandler
 	{
 		Date normalize(final Date date);
 

@@ -6,10 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
-
-import de.metas.procurement.webui.util.DateRange;
-import de.metas.procurement.webui.util.DateUtils;
+import com.google.common.collect.ImmutableList;
 
 /*
  * #%L
@@ -131,7 +128,7 @@ public class DateRangeTest
 
 	public static final class DateRangeExpectation
 	{
-		public static final DateRangeExpectation of(final DateRange dateRange)
+		public static DateRangeExpectation of(final DateRange dateRange)
 		{
 			return new DateRangeExpectation(dateRange);
 		}

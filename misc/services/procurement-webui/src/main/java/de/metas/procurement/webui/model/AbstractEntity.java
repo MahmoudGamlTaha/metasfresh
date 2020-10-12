@@ -14,8 +14,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import com.google.common.base.Objects;
 
 /*
  * #%L
@@ -83,7 +84,7 @@ public abstract class AbstractEntity implements Serializable
 	@Override
 	public final String toString()
 	{
-		final ToStringHelper toStringHelper = Objects.toStringHelper(this);
+		final ToStringHelper toStringHelper = MoreObjects.toStringHelper(this);
 		toString(toStringHelper);
 		return toStringHelper
 				.add("id", id)

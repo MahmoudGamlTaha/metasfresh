@@ -1,8 +1,8 @@
 package de.metas.procurement.webui.event;
 
-import com.google.gwt.thirdparty.guava.common.eventbus.EventBus;
-import com.google.gwt.thirdparty.guava.common.eventbus.SubscriberExceptionContext;
-import com.google.gwt.thirdparty.guava.common.eventbus.SubscriberExceptionHandler;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.SubscriberExceptionContext;
+import com.google.common.eventbus.SubscriberExceptionHandler;
 
 import de.metas.procurement.webui.MFProcurementUI;
 

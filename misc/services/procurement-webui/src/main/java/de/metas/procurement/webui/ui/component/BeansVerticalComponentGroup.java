@@ -1,6 +1,6 @@
 package de.metas.procurement.webui.ui.component;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.Objects;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.data.Container;
 import com.vaadin.data.util.BeanItem;
@@ -34,15 +34,7 @@ public abstract class BeansVerticalComponentGroup<BT> extends VerticalComponentG
 {
 	private BeanItemContainer<BT> container;
 
-	private final Container.ItemSetChangeListener listener = new Container.ItemSetChangeListener()
-	{
-
-		@Override
-		public void containerItemSetChange(final Container.ItemSetChangeEvent event)
-		{
-			updateAll();
-		}
-	};
+	private final Container.ItemSetChangeListener listener = event -> updateAll();
 
 	public BeansVerticalComponentGroup()
 	{
@@ -92,3 +84,4 @@ public abstract class BeansVerticalComponentGroup<BT> extends VerticalComponentG
 
 	protected abstract Component createItemComponent(final BeanItem<BT> item);
 }
+

@@ -17,10 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
-import com.google.gwt.thirdparty.guava.common.cache.CacheLoader;
-import com.google.gwt.thirdparty.guava.common.cache.LoadingCache;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ImmutableList;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 

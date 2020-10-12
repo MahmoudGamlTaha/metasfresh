@@ -14,15 +14,15 @@ import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
-import com.google.gwt.thirdparty.guava.common.cache.CacheLoader;
-import com.google.gwt.thirdparty.guava.common.cache.LoadingCache;
-import com.google.gwt.thirdparty.guava.common.collect.ImmutableList;
-import com.google.gwt.thirdparty.guava.common.eventbus.AsyncEventBus;
-import com.google.gwt.thirdparty.guava.common.eventbus.EventBus;
-import com.google.gwt.thirdparty.guava.common.eventbus.Subscribe;
-import com.google.gwt.thirdparty.guava.common.eventbus.SubscriberExceptionContext;
-import com.google.gwt.thirdparty.guava.common.eventbus.SubscriberExceptionHandler;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ImmutableList;
+import com.google.common.eventbus.AsyncEventBus;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.google.common.eventbus.SubscriberExceptionContext;
+import com.google.common.eventbus.SubscriberExceptionHandler;
 import com.vaadin.ui.UI;
 
 import de.metas.procurement.webui.MFProcurementUI;
@@ -72,16 +72,7 @@ public class MFEventBus
 	{
 		super();
 
-		eventBus = new AsyncEventBus(taskExecutor, new SubscriberExceptionHandler()
-		{
-
-			@Override
-			public void handleException(final Throwable exception, final SubscriberExceptionContext context)
-			{
-				onEventBusException(exception, context);
-
-			}
-		});
+		eventBus = new AsyncEventBus(taskExecutor, (SubscriberExceptionHandler) (exception, context) -> onEventBusException(exception, context));
 
 		eventBus.register(this);
 	}
@@ -166,7 +157,7 @@ public class MFEventBus
 			delegate = listener;
 		}
 
-		private final UI checkExpiredAndGetUI()
+		private UI checkExpiredAndGetUI()
 		{
 			if (expired)
 			{
@@ -184,13 +175,13 @@ public class MFEventBus
 			return listenerUI;
 		}
 
-		private final void expireNow()
+		private void expireNow()
 		{
 			expired = true;
 			unregister(delegate);
 		}
 
-		private final void executeInUI(final IApplicationEvent event, final Runnable runnable)
+		private void executeInUI(final IApplicationEvent event, final Runnable runnable)
 		{
 			if (event == null)
 			{
@@ -226,43 +217,19 @@ public class MFEventBus
 		@Subscribe
 		public void onContractChanged(final ContractChangedEvent event)
 		{
-			executeInUI(event, new Runnable()
-			{
-
-				@Override
-				public void run()
-				{
-					delegate.onContractChanged(event);
-				}
-			});
+			executeInUI(event, () -> delegate.onContractChanged(event));
 		}
 
 		@Subscribe
 		public void onRfqChanged(final RfqChangedEvent event)
 		{
-			executeInUI(event, new Runnable()
-			{
-
-				@Override
-				public void run()
-				{
-					delegate.onRfqChanged(event);
-				}
-			});
+			executeInUI(event, () -> delegate.onRfqChanged(event));
 		}
 
 		@Subscribe
 		public void onProductSupplyChanged(final ProductSupplyChangedEvent event)
 		{
-			executeInUI(event, new Runnable()
-			{
-
-				@Override
-				public void run()
-				{
-					delegate.onProductSupplyChanged(event);
-				}
-			});
+			executeInUI(event, () -> delegate.onProductSupplyChanged(event));
 		}
 
 	}

@@ -9,7 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 
 /*
  * #%L
@@ -45,7 +46,7 @@ public final class DateRange implements Serializable, Cloneable
 	 * @param date
 	 * @return week range in same month as given date
 	 */
-	public static final DateRange createWeekInMonthForDay(final Date date)
+	public static DateRange createWeekInMonthForDay(final Date date)
 	{
 		Preconditions.checkNotNull(date, "date not null");
 
@@ -87,7 +88,7 @@ public final class DateRange implements Serializable, Cloneable
 		return of(dateWeekStart, dateWeekEnd);
 	}
 
-	public static final DateRange createWeek(final Date date)
+	public static DateRange createWeek(final Date date)
 	{
 		final Date dateFrom = DateUtils.truncToWeek(date);
 		final Date dateTo = DateUtils.addDays(dateFrom, 6);
@@ -133,7 +134,7 @@ public final class DateRange implements Serializable, Cloneable
 	@Override
 	public String toString()
 	{
-		return com.google.gwt.thirdparty.guava.common.base.Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("from", dateFrom)
 				.add("to", dateTo)
 				.toString();
@@ -205,14 +206,7 @@ public final class DateRange implements Serializable, Cloneable
 
 	public Iterable<Date> daysIterable()
 	{
-		return new Iterable<Date>()
-		{
-			@Override
-			public Iterator<Date> iterator()
-			{
-				return new DayIterator(dateFrom, dateTo);
-			}
-		};
+		return () -> new DayIterator(dateFrom, dateTo);
 	}
 	
 	public boolean contains(final Date date)

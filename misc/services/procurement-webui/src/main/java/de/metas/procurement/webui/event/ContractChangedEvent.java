@@ -1,6 +1,6 @@
 package de.metas.procurement.webui.event;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /*
  * #%L
@@ -44,7 +44,7 @@ public class ContractChangedEvent implements IApplicationEvent
 	@Override
 	public String toString()
 	{
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("bpartner_uuid", bpartner_uuid)
 				.add("contract_id", contract_id)
 				.toString();

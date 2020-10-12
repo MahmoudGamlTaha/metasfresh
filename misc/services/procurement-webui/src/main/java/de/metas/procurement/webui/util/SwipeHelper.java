@@ -2,13 +2,12 @@ package de.metas.procurement.webui.util;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
-import com.google.gwt.thirdparty.guava.common.cache.Cache;
-import com.google.gwt.thirdparty.guava.common.cache.CacheBuilder;
+import com.google.common.base.Preconditions;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.JavaScript;
-import com.vaadin.ui.JavaScriptFunction;
 import com.vaadin.ui.UI;
 
 import elemental.json.JsonArray;
@@ -109,14 +108,7 @@ public class SwipeHelper
 		}
 
 		final JavaScript javaScript = JavaScript.getCurrent();
-		javaScript.addFunction(JS_FUNC_OnSwipe, new JavaScriptFunction()
-		{
-			@Override
-			public void call(final JsonArray arguments)
-			{
-				invokeOnSwipe(arguments);
-			}
-		});
+		javaScript.addFunction(JS_FUNC_OnSwipe, arguments -> invokeOnSwipe(arguments));
 	}
 
 	private void invokeOnSwipe(final JsonArray arguments)
@@ -168,7 +160,7 @@ public class SwipeHelper
 		}
 	}
 
-	public static interface SwipeHandler
+	public interface SwipeHandler
 	{
 		void onSwipe(final ComponentSwipe swipe);
 	}

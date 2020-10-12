@@ -10,9 +10,9 @@ import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects.ToStringHelper;
-import com.google.gwt.thirdparty.guava.common.base.Optional;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 
 /*
  * #%L
@@ -47,30 +47,20 @@ public class Product extends AbstractEntity
 	}
 
 	public static final String PROPERTYNAME_Id = "id";
-	public static final Comparator<Product> COMPARATOR_Id = new Comparator<Product>()
-	{
-		@Override
-		public int compare(final Product o1, final Product o2)
-		{
-			final Long id1 = Optional.fromNullable(o1.getId()).or(Long.valueOf(0));
-			final Long id2 = Optional.fromNullable(o2.getId()).or(Long.valueOf(0));
-			return id1.compareTo(id2);
-		}
+	public static final Comparator<Product> COMPARATOR_Id = (o1, o2) -> {
+		final Long id1 = Optional.fromNullable(o1.getId()).or(Long.valueOf(0));
+		final Long id2 = Optional.fromNullable(o2.getId()).or(Long.valueOf(0));
+		return id1.compareTo(id2);
 	};
 
 	public static final String PROPERTYNAME_Name = "name";
 
 	public static final Comparator<Product> comparatorByName(final Locale locale)
 	{
-		return new Comparator<Product>()
-		{
-			@Override
-			public int compare(final Product o1, final Product o2)
-			{
-				final String name1 = o1 == null ? "" : o1.getName(locale);
-				final String name2 = o2 == null ? "" : o2.getName(locale);
-				return name1.compareTo(name2);
-			}
+		return (o1, o2) -> {
+			final String name1 = o1 == null ? "" : o1.getName(locale);
+			final String name2 = o2 == null ? "" : o2.getName(locale);
+			return name1.compareTo(name2);
 		};
 	}
 

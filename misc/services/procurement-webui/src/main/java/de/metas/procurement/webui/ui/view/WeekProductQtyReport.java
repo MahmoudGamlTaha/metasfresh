@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Preconditions;
 
 import de.metas.procurement.webui.Application;
 import de.metas.procurement.webui.model.BPartner;
@@ -83,7 +83,7 @@ public class WeekProductQtyReport
 	@Override
 	public String toString()
 	{
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("product", product)
 				.add("qty", qty)
 				.add("week", _week)

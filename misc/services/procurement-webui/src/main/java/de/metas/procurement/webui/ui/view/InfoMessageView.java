@@ -3,8 +3,8 @@ package de.metas.procurement.webui.ui.view;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.annotations.VisibleForTesting;
-import com.google.gwt.thirdparty.guava.common.base.Optional;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Optional;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;

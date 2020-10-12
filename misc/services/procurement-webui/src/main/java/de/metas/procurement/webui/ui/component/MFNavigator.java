@@ -1,11 +1,11 @@
 package de.metas.procurement.webui.ui.component;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Supplier;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
-import com.google.gwt.thirdparty.guava.common.base.Supplier;
+import com.google.common.base.Preconditions;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -108,7 +108,7 @@ public class MFNavigator extends Navigator
 	public MFNavigator setLoginView(final String loginViewName, final Class<? extends View> loginViewClass, final Supplier<Boolean> isLoggedInSupplier)
 	{
 		Preconditions.checkNotNull(loginViewName, "loginViewName is null");
-		Preconditions.checkArgument(!Objects.equal(VIEWNAME_DEFAULT, loginViewClass), "loginViewName cannot be the default view");
+		Preconditions.checkArgument(!Objects.equals(VIEWNAME_DEFAULT, loginViewClass), "loginViewName cannot be the default view");
 		Preconditions.checkNotNull(isLoggedInSupplier, "isLoggedInSupplier is null");
 		Preconditions.checkNotNull(loginViewClass, "loginViewClass is null");
 

@@ -8,21 +8,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.Objects;
 import com.vaadin.addon.touchkit.ui.Toolbar;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.VerticalLayout;
 
 import de.metas.procurement.webui.model.Trend;
 import de.metas.procurement.webui.ui.component.BeansVerticalComponentGroup;
 import de.metas.procurement.webui.ui.model.ProductQtyReport;
 import de.metas.procurement.webui.ui.model.ProductQtyReportContainer;
-
-import com.vaadin.ui.Component;
-import com.vaadin.ui.VerticalLayout;
 
 /*
  * #%L
@@ -108,14 +105,7 @@ public class WeeklyDetailedReportingView extends MFProcurementNavigationView
 		button.setStyleName("no-decoration");
 		Trend.applyStyleName(button, trend);
 		button.setIcon(trend.getIcon());
-		button.addClickListener(new ClickListener()
-		{
-			@Override
-			public void buttonClick(final ClickEvent event)
-			{
-				onNextWeekTrendButtonPressed(trend);
-			}
-		});
+		button.addClickListener(event -> onNextWeekTrendButtonPressed(trend));
 
 		trend2button.put(trend, button);
 		return button;

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.vaadin.spring.i18n.I18N;
 
-import com.google.gwt.thirdparty.guava.common.base.Strings;
+import com.google.common.base.Strings;
 import com.vaadin.addon.touchkit.ui.EmailField;
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
@@ -22,7 +22,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Image;
@@ -124,26 +123,11 @@ public class LoginView extends NavigationView implements View
 			final Button loginButton = new Button(i18n.get("LoginView.fields.loginButton"));
 			loginButton.addStyleName(STYLE_LoginButton);
 			loginButton.setClickShortcut(KeyCode.ENTER);
-			loginButton.addClickListener(new Button.ClickListener()
-			{
-				@Override
-				public void buttonClick(final ClickEvent event)
-				{
-					onUserLogin(email.getValue(), password.getValue());
-				}
-			});
+			loginButton.addClickListener(event -> onUserLogin(email.getValue(), password.getValue()));
 
 			final Button forgotPasswordButton = new Button(i18n.get("LoginView.fields.forgotPasswordButton"));
 			forgotPasswordButton.setStyleName(STYLE_ForgotPasswordButton);
-			forgotPasswordButton.addClickListener(new Button.ClickListener()
-			{
-
-				@Override
-				public void buttonClick(ClickEvent event)
-				{
-					onForgotPassword(email.getValue());
-				}
-			});
+			forgotPasswordButton.addClickListener(event -> onForgotPassword(email.getValue()));
 
 			final CssLayout contentWrapper = new CssLayout(content, loginButton, forgotPasswordButton);
 			contentWrapper.addStyleName(STYLE_LoginFormWrapper);

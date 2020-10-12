@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.vaadin.spring.annotation.PrototypeScope;
 
-import com.google.gwt.thirdparty.guava.common.base.Ascii;
-import com.google.gwt.thirdparty.guava.common.base.Preconditions;
+import com.google.common.base.Ascii;
+import com.google.common.base.Preconditions;
 
 import de.metas.procurement.webui.Application;
 

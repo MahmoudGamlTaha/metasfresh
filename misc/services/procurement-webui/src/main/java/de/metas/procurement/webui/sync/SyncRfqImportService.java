@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gwt.thirdparty.guava.common.base.Objects;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import de.metas.procurement.sync.SyncRfQCloseEvent;
 import de.metas.procurement.sync.protocol.SyncProduct;
@@ -196,7 +197,7 @@ public class SyncRfqImportService extends AbstractSyncImportService
 		final ContractLine contractLine = contractLineRepo.findByUuid(contractLine_uuid);
 		//
 		final Date day = DateUtils.truncToDay(syncProductSupply.getDay());
-		final BigDecimal qty = Objects.firstNonNull(syncProductSupply.getQty(), BigDecimal.ZERO);
+		final BigDecimal qty = MoreObjects.firstNonNull(syncProductSupply.getQty(), BigDecimal.ZERO);
 		
 		ProductSupply productSupply = productSupplyRepo.findByProductAndBpartnerAndDay(product, bpartner, day);
 		final boolean isNew;
